@@ -15,7 +15,7 @@
                 },
                 dataType: "json",
 		        success : function(data, textStatus, jqXHR) {
-                    vote_el.find(".score").html(data['score']);
+                    vote_el.prev(".score").html(data['score']);
                     switch (data.voted_as) {
                         case 0:
 	                        vote_el.find("a.upVote, a.downVote").removeClass("voted");
