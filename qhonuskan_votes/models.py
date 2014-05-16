@@ -3,8 +3,6 @@ from django.db.models.base import ModelBase
 from django.utils.translation import ugettext_lazy as _
 from django.dispatch import Signal
 from django.conf import settings
-import django
-# from qhonuskan_votes.compat import User
 
 vote_changed = Signal(providing_args=["voter", "object"])
 
@@ -72,7 +70,6 @@ class VotesField(object):
             Make every Vote model have their own name/table.
             """
             def __new__(c, name, bases, attrs):
-
                 # Rename class
                 name = '%sVote' % model._meta.object_name
 
@@ -88,11 +85,11 @@ class VotesField(object):
 
         rel_nm_user = '%s_votes' % model._meta.object_name.lower()
 
-        class Vote(models.Model):
+        class Vote(models.Model, metaclass=VoteMeta):
             """
             Vote model
             """
-            __metaclass__ = VoteMeta
+            #__metaclass__ = VoteMeta
 
             voter = models.ForeignKey(
                 settings.AUTH_USER_MODEL,
