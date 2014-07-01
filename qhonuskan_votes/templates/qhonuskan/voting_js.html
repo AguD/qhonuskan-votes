@@ -3,7 +3,7 @@
         $('.login').click();
     }
     $(document).ready(function() {
-        $(".vote_buttons").bind("vote", function(event, value) {
+        $('.container').on("vote", ".vote_buttons", function(event, value) {
             var vote_el = $(this);
             $.ajax({
                 type:'POST',
@@ -37,7 +37,7 @@
                 }
             });
         });
-        $('.upVote, .downVote').click(function(){
+        $('.container').on('click', '.upVote, .downVote', function(){
             $(this).parent().trigger("vote", $(this).attr("x:value"));
             return false;
         });
