@@ -4,9 +4,10 @@ from django.core.urlresolvers import reverse
 register = template.Library()
 
 
-@register.inclusion_tag('qhonuskan/voting_js.html')
-def voting_script():
-    return {"vote_url": reverse('qhonuskan_vote')}
+@register.inclusion_tag('qhonuskan/voting_js.html', takes_context=True)
+def voting_script(context):
+    context['vote_url']=reverse('qhonuskan_vote')
+    return context
 
 
 @register.filter
