@@ -9,6 +9,17 @@ def voting_script(context):
     context['vote_url']=reverse('qhonuskan_vote')
     return context
 
+@register.assignment_tag
+def get_vote_status(object, user):
+    """
+    Performance wise tag, replaces is_up_voted_by and is_down_voted_by 
+    cutting the number of queries to half.
+    """
+    votes = object.votes.filter(voter=user)
+    if not votes.exists():
+        return 0
+    return votes.get().value
+
 
 @register.filter
 def is_up_voted_by(object, user):
@@ -30,7 +41,6 @@ def is_down_voted_by(object, user):
         return bool(object.votes.filter(voter=user, value=-1).count())
     else:
         return False
-
 
 @register.tag
 def vote_buttons_for(parser, token):
