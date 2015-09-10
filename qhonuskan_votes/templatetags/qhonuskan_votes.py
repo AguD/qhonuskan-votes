@@ -15,6 +15,8 @@ def get_vote_status(object, user):
     Performance wise tag, replaces is_up_voted_by and is_down_voted_by 
     cutting the number of queries to half.
     """
+    if not user.is_authenticated():
+        return 0
     votes = object.votes.filter(voter=user)
     if not votes.exists():
         return 0
