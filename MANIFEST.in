@@ -1,6 +1,7 @@
 recursive-include qhonuskan_votes *.py *.feature
 recursive-include qhonuskan_votes/static *
 recursive-include qhonuskan_votes/templates *.html
+recursive-include qhonuskan_votes/locale *
 include *.txt
 include README.rst
 include requirements/global.txt
