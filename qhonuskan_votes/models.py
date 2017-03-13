@@ -3,6 +3,7 @@ from django.db.models.base import ModelBase
 from django.utils.translation import ugettext_lazy as _
 from django.dispatch import Signal
 from django.conf import settings
+import django
 
 vote_changed = Signal(providing_args=["voter", "object"])
 
